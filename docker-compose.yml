@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  average_response:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: average_response
+    container_name: average_response
+    network_mode: host
+    restart: unless-stopped
+    volumes:
+      - .:/app
+    command: ["python", "-m", "main.py"]

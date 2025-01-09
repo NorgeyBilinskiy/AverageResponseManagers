@@ -1,0 +1,15 @@
+images_for_readme/
+README.md
+update_repo_windows.bat
+
+venv/
+.venv/
+.gitignore
+
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.log
+.DS_Store
+*.swp
