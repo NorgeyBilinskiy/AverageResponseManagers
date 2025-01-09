@@ -105,6 +105,9 @@ To update the project files in the repository, execute one of the following scri
 
 - For Windows: `update_repo_windows.bat`
 
+## Results:
+![Example Plots](images_readme/results.jpg)
+
 ## About the Author
 
 This project was created by a Data Analyst.  
