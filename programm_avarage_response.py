@@ -25,7 +25,7 @@ def main():
     DB_USER = config.bd_info().get("USER")
     DB_PASSWORD = config.bd_info().get("PASSWORD")
 
-    PATH_GOOGLE_TOKEN = config.get_paths().get('google_token')
+    PATH_GOOGLE_TOKEN = config.get_paths().get("google_token")
     SPREADSHEET_ID = config.get_google_sheets_info().get("SPREADSHEET_ID")
     RANGE_NAME = config.get_google_sheets_info().get("RANGE_NAME")
 
@@ -33,7 +33,7 @@ def main():
     warnings.filterwarnings(
         "ignore",
         category=UserWarning,
-        message="pandas only supports SQLAlchemy connectable"
+        message="pandas only supports SQLAlchemy connectable",
     )
 
     # === Extract Data from Database ===
@@ -52,9 +52,9 @@ def main():
     else:
         logger.error("No data was extracted.")
 
-    df_chat_messages = dict_table['chat_messages']
-    df_managers = dict_table['managers']
-    df_rops = dict_table['rops']
+    df_chat_messages = dict_table["chat_messages"]
+    df_managers = dict_table["managers"]
+    df_rops = dict_table["rops"]
 
     # === Analyze Chat Messages ===
     analyzer = ChatResponseAnalyzer(
@@ -64,9 +64,7 @@ def main():
     )
 
     average_response_time_pandas = analyzer.analyze_result(
-        df_chat_messages,
-        df_managers,
-        df_rops
+        df_chat_messages, df_managers, df_rops
     )
 
     # === Save Data to Google Sheets ===
@@ -74,6 +72,7 @@ def main():
     gs_handler.save_data_table(RANGE_NAME, average_response_time_pandas)
 
     logger.info("END SCRIPT")
+
 
 if __name__ == "__main__":
     main()

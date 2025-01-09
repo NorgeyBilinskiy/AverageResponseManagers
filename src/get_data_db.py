@@ -5,16 +5,18 @@ import psycopg2
 from loguru import logger
 from tenacity import retry, stop_after_delay, wait_fixed
 
+
 class DatabaseExtractor:
-    def __init__(self,
-                 db_host: str,
-                 db_port: int,
-                 db_name: str,
-                 db_user: str,
-                 db_password: str,
-                 output_folder: str = None,
-                 queries: dict = None
-                 ):
+    def __init__(
+        self,
+        db_host: str,
+        db_port: int,
+        db_name: str,
+        db_user: str,
+        db_password: str,
+        output_folder: str = None,
+        queries: dict = None,
+    ):
         """
         Initializes the DatabaseExtractor with database connection parameters and the folder to save CSV files.
 
@@ -35,7 +37,7 @@ class DatabaseExtractor:
         self.queries = queries or {
             "chat_messages": "SELECT * FROM test.chat_messages;",
             "managers": "SELECT * FROM test.managers;",
-            "rops": "SELECT * FROM test.rops;"
+            "rops": "SELECT * FROM test.rops;",
         }
 
     def connect_to_db(self) -> psycopg2.extensions.connection:
@@ -50,7 +52,7 @@ class DatabaseExtractor:
                 port=self.db_port,
                 dbname=self.db_name,
                 user=self.db_user,
-                password=self.db_password
+                password=self.db_password,
             )
             logger.info("Database connection established.")
             return conn
@@ -59,9 +61,7 @@ class DatabaseExtractor:
             raise
 
     @retry(stop=stop_after_delay(60), wait=wait_fixed(5))
-    def extract_and_save_data(self,
-                              save_to_csv: bool = False
-                              ) -> dict:
+    def extract_and_save_data(self, save_to_csv: bool = False) -> dict:
         """
         Extracts data from the database using predefined or custom SQL queries and optionally saves them as CSV files.
 
@@ -80,9 +80,13 @@ class DatabaseExtractor:
                     logger.info(f"Data extracted from table: {table_name}")
 
                     if save_to_csv and self.output_folder:
-                        output_path = os.path.join(self.output_folder, f"{table_name}.csv")
+                        output_path = os.path.join(
+                            self.output_folder, f"{table_name}.csv"
+                        )
                         df.to_csv(output_path, index=False, encoding="utf-8")
-                        logger.info(f"Data from table {table_name} saved to {output_path}")
+                        logger.info(
+                            f"Data from table {table_name} saved to {output_path}"
+                        )
                 except Exception as e:
                     logger.error(f"Error processing table {table_name}: {e}")
 
@@ -91,7 +95,7 @@ class DatabaseExtractor:
             raise
 
         finally:
-            if 'conn' in locals() and conn:
+            if "conn" in locals() and conn:
                 conn.close()
                 logger.info("Database connection closed.")
 

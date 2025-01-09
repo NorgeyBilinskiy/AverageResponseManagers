@@ -16,9 +16,7 @@ class Config:
             "google_sheets_info": os.path.join(
                 self.BASE_DIR, "./settings/google_api", "google_sheets_info.yaml"
             ),
-            "db_info": os.path.join(
-                self.BASE_DIR, "./settings/db_api", "connect.yaml"
-            ),
+            "db_info": os.path.join(self.BASE_DIR, "./settings/db_api", "connect.yaml"),
         }
 
         # === Path Validation ===
@@ -26,7 +24,6 @@ class Config:
         for name, path in self.PATH_TO_VALIDATE.items():
             FileValidator.validate_file_path(path)
         logger.info("All file paths have been validated successfully.")
-
 
         # === Google Sheets Configuration ===
         google_sheets_info = FileHandler.load_yaml(
@@ -36,9 +33,7 @@ class Config:
         self.RANGE_NAME = google_sheets_info["RANGE_NAME"]
 
         # === DB Configuration ===
-        db_info = FileHandler.load_yaml(
-            self.PATH_TO_VALIDATE["db_info"]
-        )
+        db_info = FileHandler.load_yaml(self.PATH_TO_VALIDATE["db_info"])
         self.HOST = db_info["database"]["host"]
         self.PORT = db_info["database"]["port"]
         self.NAME = db_info["database"]["name"]

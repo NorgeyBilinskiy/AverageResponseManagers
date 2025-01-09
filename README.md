@@ -8,20 +8,12 @@ This project calculates the average response time of managers based on chat mess
 
 Before you can run the project, ensure the following requirements are met:
 
-1. **API Token and Configuration Files**  
+**API Token and Configuration Files**  
    The project interacts with Google Sheets and your database. You'll need API tokens and database connection information.
 
    - `settings/google_api/token.json`: This file contains your Google Sheets API credentials. You will need to create a project in the Google Cloud Console, enable the Google Sheets API, and generate a service account key (in JSON format).
    - `settings/google_api/google_sheets_info.yaml`: Contains the Google Sheets ID and range information for where the result should be saved.
    - `settings/db_api/connect.yaml`: Defines the connection parameters for your database (e.g., host, port, user, password).
-
-2. **Python and Dependencies**  
-   The project is built with Python 3.12 or higher. You will need to install the required dependencies.
-
-   - Install dependencies using `pip`:
-     ```bash
-     pip install -r requirements.txt
-     ```
 
 ### Project Structure
 
