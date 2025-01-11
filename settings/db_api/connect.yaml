@@ -1,6 +1,6 @@
 database:
   host: "your host"
-  port: 'your port'
+  port: "your port"
   name: "your db name"
   user: "your user"
   password: "your password"
