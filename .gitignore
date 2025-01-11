@@ -15,5 +15,5 @@ venv
 .rar
 
 # Tokens and creds
-settings/google_api/token.json
-settings/db_api/connect.yaml
+#settings/google_api/token.json
+#settings/db_api/connect.yaml

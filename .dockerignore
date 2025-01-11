@@ -1,6 +1,7 @@
-images_for_readme/
+images_readme/
 README.md
 update_repo_windows.bat
+update_repo_linux.bat
 
 venv/
 .venv/
